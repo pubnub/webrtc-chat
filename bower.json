@@ -4,7 +4,8 @@
   "dependencies": {
     "sass-bootstrap": "~2.3.0",
     "modernizr": "~2.6.2",
-    "jquery": "~1.9.1"
+    "jquery": "~1.9.1",
+    "jquery-mobile-bower": "~1.3.2"
   },
   "devDependencies": {}
 }
