@@ -24,6 +24,12 @@ document.querySelector('#call').addEventListener 'click', (event) ->
       document.querySelector('#call-video').src = URL.createObjectURL(event.stream)
       document.querySelector('#call-video').play()
 
+pubnub.onNewConnection (uuid) ->
+  unless not myStream
+    pubnub.publish
+      user: uuid,
+      stream: myStream
+
 gotStream = (stream) ->
   document.querySelector('#self-call-video').src = URL.createObjectURL(stream)
   document.querySelector('#self-call-video').play()

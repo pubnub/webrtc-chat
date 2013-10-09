@@ -90,7 +90,8 @@
         PUBLISH_TYPE = {              // Publish type enum
           STREAM: 1,
           MESSAGE: 2
-        };
+        },
+        ON_NEW_CONNECTION = [];
 
     // Expose PUBNUB UUID (Need to fix this in core)
     PUBNUB['UUID'] = uuid;
@@ -146,6 +147,11 @@
         // Setup the connection if we do not have one already.
         if (connected === false) {
           PUBNUB.createP2PConnection(message.uuid, false);
+
+          for(var i = 0; i < ON_NEW_CONNECTION.length; i++) {
+            var callback = ON_NEW_CONNECTION[i];
+            callback(message.uuid);
+          }
         }
 
         var connection = PEER_CONNECTIONS[message.uuid];
@@ -249,6 +255,10 @@
           "sdp": description
         });
       }
+    };
+
+    API['onNewConnection'] = function (callback) {
+      ON_NEW_CONNECTION.push(callback);
     };
 
     // PUBNUB.createP2PConnection
