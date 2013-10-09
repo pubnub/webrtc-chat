@@ -10,6 +10,12 @@ document.querySelector('#connect').addEventListener 'click', (event) ->
     subscribe_key: 'sub-c-49a2a468-ced1-11e2-a5be-02ee2ddab7fe'
     uuid: uuid
 
+  pubnub.onNewConnection (uuid) ->
+    unless not myStream
+      pubnub.publish
+        user: uuid,
+        stream: myStream
+
 document.querySelector('#call').addEventListener 'click', (event) ->
   otherUuid = document.querySelector('#other-userid').value
 
@@ -22,17 +28,11 @@ document.querySelector('#call').addEventListener 'click', (event) ->
     stream: (bad, event) ->
       console.log "Got stream:", event
       document.querySelector('#call-video').src = URL.createObjectURL(event.stream)
-      document.querySelector('#call-video').play()
-
-pubnub.onNewConnection (uuid) ->
-  unless not myStream
-    pubnub.publish
-      user: uuid,
-      stream: myStream
+      #document.querySelector('#call-video').play()
 
 gotStream = (stream) ->
   document.querySelector('#self-call-video').src = URL.createObjectURL(stream)
-  document.querySelector('#self-call-video').play()
+  #document.querySelector('#self-call-video').play()
   myStream = stream
 
 navigator.webkitGetUserMedia({audio: false, video: true}, gotStream)
