@@ -146,12 +146,12 @@
 
         // Setup the connection if we do not have one already.
         if (connected === false) {
-          PUBNUB.createP2PConnection(message.uuid, false);
-
-          for(var i = 0; i < ON_NEW_CONNECTION.length; i++) {
-            var callback = ON_NEW_CONNECTION[i];
-            callback(message.uuid);
-          }
+          PUBNUB.createP2PConnection(message.uuid, false, function (uuid) {
+            for(var i = 0; i < ON_NEW_CONNECTION.length; i++) {
+              var callback = ON_NEW_CONNECTION[i];
+              callback(uuid);
+            }
+          });
         }
 
         var connection = PEER_CONNECTIONS[message.uuid];
@@ -263,7 +263,7 @@
 
     // PUBNUB.createP2PConnection
     // Signals and creates a P2P connection between two users.
-    API['createP2PConnection'] = function (uuid, offer) {
+    API['createP2PConnection'] = function (uuid, offer, callback) {
       if (PEER_CONNECTIONS[uuid] == null) {
         var pc = new RTCPeerConnection(RTC_CONFIGURATION, PC_OPTIONS),
             signalingChannel = new SignalingChannel(this, UUID, uuid),
@@ -336,6 +336,10 @@
           history: [],
           signalingChannel: signalingChannel
         };
+
+        if (callback) {
+          callback(uuid);
+        }
 
         // Compare UUIDs to guarantee we determine the 'leader' for negotiating the connection
         if (UUID > uuid) {
@@ -415,11 +419,11 @@
           if (options.stream != null) {
             debug("Publishing stream to user", options.stream, options.user);
             PEER_CONNECTIONS[options.user].connection.addStream(options.stream);
-            PUBLISH_QUEUE[options.user].push({
-              type: PUBLISH_TYPE.STREAM,
-              stream: options.stream
-            });
-            handleMessage(PEER_CONNECTIONS[options.user], PUBLISH_QUEUE[options.user].shift());
+            // PUBLISH_QUEUE[options.user].push({
+            //   type: PUBLISH_TYPE.STREAM,
+            //   stream: options.stream
+            // });
+            // handleMessage(PEER_CONNECTIONS[options.user], PUBLISH_QUEUE[options.user].shift());
           } else if (options.message != null) {
             PUBLISH_QUEUE[options.user].push({
               type: PUBLISH_TYPE.MESSAGE,

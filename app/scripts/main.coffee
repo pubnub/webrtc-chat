@@ -16,6 +16,13 @@ document.querySelector('#connect').addEventListener 'click', (event) ->
         user: uuid,
         stream: myStream
 
+      pubnub.subscribe
+        user: uuid
+        stream: (bad, event) ->
+          console.log "Got stream:", event
+          document.querySelector('#call-video').src = URL.createObjectURL(event.stream)
+          #document.querySelector('#call-video').play()
+
 document.querySelector('#call').addEventListener 'click', (event) ->
   otherUuid = document.querySelector('#other-userid').value
 
