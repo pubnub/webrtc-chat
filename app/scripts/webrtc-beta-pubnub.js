@@ -406,6 +406,8 @@
     // PUBNUB.publish overload
     API['publish'] = (function (_super) {
       return function (options) {
+        var exists = PEER_CONNECTIONS[options.user] != null;
+
         if (options == null) {
           error("You must send an object when using PUBNUB.publish!");
         }
@@ -413,12 +415,19 @@
         if (options.user != null) {
           // Setup the connection if it does not exist
           if (PEER_CONNECTIONS[options.user] == null) {
-            PUBNUB.createP2PConnection(options.user);
+            PUBNUB.createP2PConnection(options.user, null, function (uuid) {
+              if (options.stream != null) {
+                debug("Publishing stream to user", options.stream, options.user);
+                PEER_CONNECTIONS[options.user].connection.addStream(options.stream);
+              }
+            });
           }
 
           if (options.stream != null) {
-            debug("Publishing stream to user", options.stream, options.user);
-            PEER_CONNECTIONS[options.user].connection.addStream(options.stream);
+            if (exists == true) {
+              debug("Publishing stream to user", options.stream, options.user);
+              PEER_CONNECTIONS[options.user].connection.addStream(options.stream);
+            }
             // PUBLISH_QUEUE[options.user].push({
             //   type: PUBLISH_TYPE.STREAM,
             //   stream: options.stream
@@ -443,7 +452,6 @@
     // PUBNUB.subscribe overload
     API['subscribe'] = (function (_super) {
       return function (options) {
-        console.log("SUBSCRIBEEEEEEEE", options);
         if (options == null) {
           error("You must send an object when using PUBNUB.subscribe!");
         }
@@ -455,8 +463,6 @@
           }
 
           var connection = PEER_CONNECTIONS[options.user];
-
-          console.log("SUBSCRIBING", options);
 
           if (options.stream) {
             // Setup the stream added listener

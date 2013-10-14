@@ -14,3 +14,57 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
     color: #000;
     padding: 0.2em 0;
 }
+
+.header {
+  background: #333;
+  color: #FFF;
+  border-bottom: 3px solid #095100;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+
+.pad-10 {
+  padding-top: 10px;
+}
+
+.pad-20 {
+  padding-top: 20px;
+}
+
+.page {
+  display: none;
+
+  &.active {
+    display: inline;
+  }
+}
+
+#video-container {
+  position: relative;
+  min-height: 350px;
+  display: inline-block;
+
+  #self-call-video {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    width: 200px;
+    height: 150px;
+    z-index: 2;
+  }
+
+  #call-video {
+    width: 100%;
+    z-index: 1;
+  }
+
+  video {
+    position: absolute;
+    background: blue;
+  }
+}
