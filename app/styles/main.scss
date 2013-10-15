@@ -2,17 +2,19 @@ $iconSpritePath: "../images/glyphicons-halflings.png";
 $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 
 @import 'sass-bootstrap/lib/bootstrap';
+@import 'anim';
 
-.hero-unit {
-    margin: 50px auto 0 auto;
-    width: 300px;
+body, html {
+  height: 100%;
+  background: #CCC;
 }
 
-.browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+.box {
+  display: inline-block;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
 }
 
 .header {
@@ -36,17 +38,59 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
   padding-top: 20px;
 }
 
+// Page styles
 .page {
   display: none;
+  height: 100%;
+
+  .row-fluid {
+    height: 100%;
+  }
 
   &.active {
-    display: inline;
+    display: block;
+    -webkit-animation: page-fade-in 300ms;
+    animation: page-fade-in 300ms;
+  }
+}
+
+// User list area
+.sidebar {
+  height: 100%;
+  background: #CCC;
+  border-top: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+#user-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  .user {
+    list-style: none;
+    background: white;
+    padding: 15px;
+
+    a.btn {
+      float: right;
+    }
+  }
+}
+
+// Video container area
+.call-content {
+  height: 100%;
+
+  .row {
+    background: #333;
+    height: 100%;
   }
 }
 
 #video-container {
+  background: black;
   position: relative;
-  min-height: 350px;
+  height: 75%;
   display: inline-block;
 
   #self-call-video {
@@ -59,12 +103,13 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
   }
 
   #call-video {
-    width: 100%;
+    display: block;
+    height: 100%;
+    margin: 0 auto;
     z-index: 1;
   }
 
   video {
-    position: absolute;
-    background: blue;
+    // background: blue;
   }
 }

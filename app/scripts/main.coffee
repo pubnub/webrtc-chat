@@ -34,6 +34,30 @@ $(document).ready () ->
 
     $(document).trigger 'pubnub:ready'
 
+  # User List
+  # ==================
+  userTemplate = _.template $("#user-item-template").text()
+  userList = $("#user-list")
+  $(document).on 'pubnub:ready', (event) ->
+    pubnub.subscribe
+      channel: 'phonebook'
+      callback: (message) ->
+        # Do nothing
+      presence: (data) ->
+        # {
+        #   action: "join"/"leave"
+        #   timestamp: 12345
+        #   uuid: "Dan"
+        #   occupancy: 2
+        # }
+        if data.action is "join" and data.uuid isnt uuid
+          newItem = userTemplate
+            name: data.uuid
+          userList.append newItem
+        else if data.action is "leave" and data.uuid isnt uuid
+          item = userList.find "li[data-user=\"#{data.uuid}\"]"
+          item.remove()
+
   # Answering
   # =================
   caller = ''
@@ -85,8 +109,9 @@ $(document).ready () ->
 
   # Calling
   # =================
-  document.querySelector('#call').addEventListener 'click', (event) ->
-    otherUuid = document.querySelector('#other-userid').value
+  $('#user-list').on 'click', 'a[data-user]', (event) ->
+    otherUuid = $(event.target).data 'user'
+    console.log "Calling", otherUuid
 
     pubnub.publish
       channel: 'call'
