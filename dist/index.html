@@ -10,39 +10,39 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link rel="stylesheet" href="styles/a2842065.main.css">
+        <link rel="stylesheet" href="styles/cc51f3dc.main.css">
         <script src="scripts/vendor/f7f27360.modernizr.js"></script>
     </head>
     <body>
-        <div class="row-fluid header">
-            <div class="span12">
-                <h3>WebRTC Chatter</h3>
-            </div>
-        </div>
-
-        <div class="row-fluid fade" id="page-login">
+        <div class="row-fluid" id="page-login">
             <div class="span12">
                 <div class="pad-20 center">
-                    <input type="text" id="userid" placeholder="Username">
-                    <a href="#" class="btn btn-large btn-primary" id="login">Login</a>
-                </div>
-            </div>
-        </div>
-
-        <div id="page-caller" class="fade">
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="pad-20 center">
-                        <input type="text" id="other-userid" placeholder="Other Unique User ID">
-                        <a href="#" class="btn btn-large btn-primary" id="call">Call</a>
+                    <div class="box">
+                        <h3>PubNub Skype</h3>
+                        <input type="text" id="userid" placeholder="Username">
+                        <br>
+                        <a href="#" class="btn btn-large btn-inverse" id="login">Login</a>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div id="page-caller">
             <div class="row-fluid">
-                <div class="span12 pad-20" id="video-container">
-                    <video id="self-call-video" src="" autoplay="autoplay" muted="true"></video>
-                    <video id="call-video" src="" autoplay="autoplay"></video>
+                <div class="span3 sidebar">
+                    <ul id="user-list">
+
+                    </ul>
+                </div>
+
+                <div class="span9 call-content">
+                    <div class="row">
+                        <div class="span12" id="video-container">
+                            <video id="self-call-video" src="" autoplay="autoplay" muted="true"></video>
+                            <video id="call-video" src="" autoplay="autoplay"></video>
+                            <a href="#" class="btn btn-danger">Hang Up</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,6 +61,13 @@
           </div>
         </div>
 
+        <script type="text/html" id="user-item-template">
+            <li class="user" data-user="<%= name %>">
+                <span class="name"><%= name %></span>
+                <a href="#" class="btn btn-success" data-user="<%= name %>">Call</a>
+            </li>
+        </script>
+
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -75,9 +82,9 @@
             ga('create','UA-XXXXX-X');ga('send','pageview');
         </script>
 
-        <script src="scripts/55a628e6.vendor.js"></script>
+        <script src="scripts/c19ae817.vendor.js"></script>
 
-        <script src="scripts/0ea58b29.main.js"></script>
+        <script src="scripts/7a77557d.main.js"></script>
 
         <script src="scripts/76c21dca.plugins.js"></script>
 </body>
