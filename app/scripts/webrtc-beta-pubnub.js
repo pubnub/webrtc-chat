@@ -317,12 +317,24 @@
 
         pc.onsignalingstatechange = function () {
           debug("Signaling state change: ", pc.signalingState);
+
+          if (pc.signalingState === "closed") {
+            // Not sure why this does not always get called
+          }
         };
 
         pc.oniceconnectionstatechange = function () {
           debug("Connection state change: ", pc.iceConnectionState);
           if (pc.iceConnectionState === "connected") {
-            // Nothing for now
+            // Handle event for connect state
+            if (PEER_CONNECTIONS[uuid].events.connect) {
+              PEER_CONNECTIONS[uuid].events.connect(uuid, pc);
+            }
+          } else if (pc.iceConnectionState === "disconnected") {
+            // Handle closed event for connection
+            if (PEER_CONNECTIONS[uuid].events.disconnect) {
+              PEER_CONNECTIONS[uuid].events.disconnect(uuid, pc);
+            }
           }
         };
 
@@ -334,7 +346,8 @@
           connected: false,
           createdOffer: offer !== false,
           history: [],
-          signalingChannel: signalingChannel
+          signalingChannel: signalingChannel,
+          events: {}
         };
 
         if (callback) {
@@ -473,6 +486,8 @@
             // Setup the data channel callback listener
             connection.callback = options.callback;
           }
+
+          connection.events = options;
 
           // Replay the backfilled messages if they exist
           debug("Subscribing to user: ", options.user, connection.history);

@@ -5,25 +5,26 @@ $(document).ready () ->
     login: document.querySelector '#page-login'
     caller: document.querySelector '#page-caller'
 
-  for page of pages
-    pages[page].className += ' page'
-  pages.login.className += ' active'
-
   # Globals
   # =================
   window.pubnub = null
   uuid = null
+  currentCall = null
   myStream = null
 
   # Login
   # ================
   document.querySelector('#login').addEventListener 'click', (event) ->
     uuid = document.querySelector('#userid').value
+    login uuid
+
+  login = (name) ->
+    uuid = name
 
     window.pubnub = PUBNUB.init
       publish_key: 'pub-c-7070d569-77ab-48d3-97ca-c0c3f7ab6403'
       subscribe_key: 'sub-c-49a2a468-ced1-11e2-a5be-02ee2ddab7fe'
-      uuid: uuid
+      uuid: name
 
     pubnub.onNewConnection (uuid) ->
       unless not myStream
@@ -65,7 +66,6 @@ $(document).ready () ->
   modal.modal({ show: false })
 
   publishStream = (uuid) ->
-    console.log "Publishing Stream!!!", uuid
     pubnub.publish
       user: uuid
       stream: myStream
@@ -73,10 +73,12 @@ $(document).ready () ->
     pubnub.subscribe
       user: uuid
       stream: (bad, event) ->
-        console.log "Got stream:", event
         document.querySelector('#call-video').src = URL.createObjectURL(event.stream)
+      disconnect: (uuid, pc) ->
+        document.querySelector('#call-video').src = ''
 
   answer = (otherUuid) ->
+    currentCall = otherUuid
     publishStream otherUuid
 
     pubnub.publish
@@ -97,6 +99,7 @@ $(document).ready () ->
       channel: 'answer'
       callback: (data) ->
         if data.caller is uuid
+          currentCall = data.callee
           publishStream data.callee
 
   onCalling = (caller) ->
@@ -111,7 +114,7 @@ $(document).ready () ->
   # =================
   $('#user-list').on 'click', 'a[data-user]', (event) ->
     otherUuid = $(event.target).data 'user'
-    console.log "Calling", otherUuid
+    currentCall = otherUuid
 
     pubnub.publish
       channel: 'call'
@@ -119,9 +122,20 @@ $(document).ready () ->
         caller: uuid
         callee: otherUuid
 
+  # Hanging Up
+  # ================
+  $('#hang-up').on 'click', (event) ->
+    pubnub.peerConnection currentCall, (peerConnection) ->
+      peerConnection.close()
+
   gotStream = (stream) ->
     document.querySelector('#self-call-video').src = URL.createObjectURL(stream)
     #document.querySelector('#self-call-video').play()
     myStream = stream
 
   navigator.webkitGetUserMedia({audio: false, video: true}, gotStream)
+
+  # Debug
+  pages.caller.className += ' active'
+  login("Guest" + Math.floor(Math.random() * 100))
+  #pages.login.className += ' active'

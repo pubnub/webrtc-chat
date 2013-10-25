@@ -4,14 +4,20 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 @import 'sass-bootstrap/lib/bootstrap';
 @import 'anim';
 
+$lightColor: #F5FFF7;
+$highlightColor: #2CFFF7;
+$lighterColor: #B0FFF7;
+$mainColor: #176ABA;
+
 body, html {
   height: 100%;
-  background: #CCC;
+  background: $lightColor;
+  font-family: 'Droid Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .box {
   display: inline-block;
-  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
   background: white;
   padding: 15px;
   border-radius: 10px;
@@ -54,11 +60,51 @@ body, html {
   }
 }
 
+// Login Page
+#page-login {
+  .span6, .span4, .span8 {
+    height: 100%;
+  }
+
+  .information {
+    color: $lightColor;
+    padding-top: 50px;
+    padding-left: 5%;
+    padding-right: 30%;
+    background: $mainColor;
+    font-size: 16px;
+    line-height: 22px;
+
+    h2 {
+      color: white;
+      font-weight: 600;
+    }
+
+    h4 {
+      color: $lighterColor;
+      font-weight: 200;
+    }
+  }
+}
+
 // User list area
 .sidebar {
   height: 100%;
-  background: #CCC;
-  border-top: 1px solid rgba(255, 255, 255, 0.7);
+  background: $lightColor;
+  padding-top: 0;
+  margin-top: 0;
+
+  h3 {
+    background: $mainColor;
+    border-bottom: 3px solid darken($mainColor, 20%);
+    color: $lightColor;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px;
+    width: 100%;
+  }
 }
 
 #user-list {
