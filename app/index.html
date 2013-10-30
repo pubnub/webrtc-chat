@@ -30,6 +30,18 @@
                         <input type="text" id="userid" placeholder="Username" />
                         <br />
                         <a href="#" class="btn btn-large btn-inverse" id="login">Log In</a>
+                        <br />
+                        <span id="signinButton">
+                          <span
+                            class="g-signin"
+                            data-callback="signinCallback"
+                            data-clientid="296041572299.apps.googleusercontent.com"
+                            data-cookiepolicy="single_host_origin"
+                            data-requestvisibleactions="http://schemas.google.com/AddActivity"
+                            data-scope="https://www.googleapis.com/auth/plus.login"
+                            data-approvalprompt="force">
+                          </span>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -46,7 +58,7 @@
         <div id="page-caller" class="page">
             <div class="row-fluid">
                 <div class="span3 sidebar">
-                    <h3>Users</h3>
+                    <h3>Online Contacts</h3>
                     <ul id="user-list">
 
                     </ul>
@@ -55,9 +67,19 @@
                 <div class="span9 call-content">
                     <div class="row">
                         <div class="span12" id="video-container">
-                            <video id="self-call-video" src="" autoplay="autoplay" muted="true"></video>
-                            <video id="call-video" src="" autoplay="autoplay"></video>
-                            <a href="#" class="btn btn-danger" id="hang-up">Hang Up</a>
+                            <div class="row" id="video">
+                                <div class="span12">
+                                    <video id="self-call-video" src="" autoplay="autoplay" muted="true"></video>
+                                    <video id="call-video" src="" autoplay="autoplay"></video>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="span12" id="video-controls">
+                                    <a href="#" class="btn btn-danger" id="hang-up">Hang Up</a>
+                                    <span id="time">10:00</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -79,9 +101,9 @@
         </div>
 
         <script type="text/html" id="user-item-template">
-            <li class="user" data-user="<%= name %>">
+            <li class="user" data-user="<%= id %>">
                 <span class="name"><%= name %></span>
-                <a href="#" class="btn btn-success" data-user="<%= name %>">Call</a>
+                <a href="#" class="btn btn-success" data-user="<%= id %>">Call</a>
             </li>
         </script>
 
@@ -127,5 +149,14 @@
         <script src="bower_components/sass-bootstrap/js/bootstrap-collapse.js"></script>
         <script src="bower_components/sass-bootstrap/js/bootstrap-tab.js"></script>
         <!-- endbuild -->
+
+         <!-- Place this asynchronous JavaScript just before your </body> tag -->
+        <script type="text/javascript">
+          (function() {
+           var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+           po.src = 'https://apis.google.com/js/client:plusone.js';
+           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+         })();
+        </script>
 </body>
 </html>

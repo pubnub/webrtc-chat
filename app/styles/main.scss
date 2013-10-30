@@ -1,6 +1,8 @@
 $iconSpritePath: "../images/glyphicons-halflings.png";
 $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 
+$gridGutterWidth: 0px;
+
 @import 'sass-bootstrap/lib/bootstrap';
 @import 'anim';
 
@@ -66,6 +68,12 @@ body, html {
     height: 100%;
   }
 
+  #signinButton {
+    div {
+      margin-top: 8px !important;
+    }
+  }
+
   .information {
     color: $lightColor;
     padding-top: 50px;
@@ -90,6 +98,7 @@ body, html {
 // User list area
 .sidebar {
   height: 100%;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.7);
   background: $lightColor;
   padding-top: 0;
   margin-top: 0;
@@ -113,11 +122,13 @@ body, html {
   list-style: none;
 
   .user {
+    color: rgba(0, 0, 0, 0.8);
     list-style: none;
     background: white;
-    padding: 15px;
+    padding: 20px;
 
     a.btn {
+      margin-top: -5px;
       float: right;
     }
   }
@@ -127,9 +138,21 @@ body, html {
 .call-content {
   height: 100%;
 
-  .row {
-    background: #333;
+  & > .row {
+    background: black;
     height: 100%;
+  }
+
+  #video-controls {
+    background: #ECF2F2;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 0px 0px 10px 10px;
+    color: rgba(0, 0, 0, 0.7);
+
+    #time {
+      margin-left: 10px;
+    }
   }
 }
 
@@ -138,6 +161,14 @@ body, html {
   position: relative;
   height: 75%;
   display: inline-block;
+
+  #video {
+    height: 100%;
+
+    .span12 {
+      height: 100%;
+    }
+  }
 
   #self-call-video {
     position: absolute;

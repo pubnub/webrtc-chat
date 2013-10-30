@@ -1,3 +1,27 @@
+class GooglePlusClient
+  constructor: (@token) ->
+    @baseUrl = 'https://www.googleapis.com/plus/v1'
+
+  getCurrentUser: (callback) ->
+    req =
+      url: @baseUrl + '/people/me'
+      data:
+        access_token: @token
+        v: 3.0
+        alt: 'json'
+        'max-results': 10000
+    $.ajax(req).done callback
+
+  getContacts: (callback) ->
+    req =
+      url: @baseUrl + '/people/me/people/visible'
+      data:
+        access_token: @token
+        v: 3.0
+        alt: 'json'
+        'max-results': 10000
+    $.ajax(req).done callback
+
 $(document).ready () ->
   # Pages
   # ================
@@ -11,6 +35,7 @@ $(document).ready () ->
   uuid = null
   currentCall = null
   myStream = null
+  plusClient = null
 
   # Login
   # ================
@@ -20,6 +45,11 @@ $(document).ready () ->
 
   login = (name) ->
     uuid = name
+
+    # Get the current list of contacts
+    plusClient.getContacts (result) ->
+      # result.items
+      
 
     window.pubnub = PUBNUB.init
       publish_key: 'pub-c-7070d569-77ab-48d3-97ca-c0c3f7ab6403'
@@ -34,6 +64,30 @@ $(document).ready () ->
     pages.caller.className += ' active'
 
     $(document).trigger 'pubnub:ready'
+
+  window.signinCallback = (authResult) ->
+    if authResult['access_token']
+      # Update the app to reflect a signed in user
+      # Hide the sign-in button
+      $('#signinButton').hide()
+
+      # Create the google plus client
+      plusClient = new GooglePlusClient authResult['access_token']
+
+      # Get the user ID from google plus
+      plusClient.getCurrentUser (result) ->
+        # displayName
+        # gender
+        # id
+        # image
+        login "#{result.id}-#{result.displayName}"
+    else if authResult['error']
+      # Update to reflect signed out user
+      # Possible Values:
+      # "user_signed_out" - User is signed out
+      # "access_denied" - User denied access to your app
+      # "immediate_failed" - Could not automatically log in to the user
+      console.log "Sign-in state: #{authResult['error']}"
 
   # User List
   # ==================
@@ -53,7 +107,8 @@ $(document).ready () ->
         # }
         if data.action is "join" and data.uuid isnt uuid
           newItem = userTemplate
-            name: data.uuid
+            name: data.uuid.split('-')[1]
+            id: data.uuid
           userList.append newItem
         else if data.action is "leave" and data.uuid isnt uuid
           item = userList.find "li[data-user=\"#{data.uuid}\"]"
@@ -81,6 +136,8 @@ $(document).ready () ->
     currentCall = otherUuid
     publishStream otherUuid
 
+    $(document).trigger "call:start", otherUuid
+
     pubnub.publish
       channel: 'answer'
       message:
@@ -101,6 +158,7 @@ $(document).ready () ->
         if data.caller is uuid
           currentCall = data.callee
           publishStream data.callee
+          $(document).trigger "call:start", data.callee
 
   onCalling = (caller) ->
     modal.find('.caller').text "#{caller} is calling..."
@@ -127,6 +185,33 @@ $(document).ready () ->
   $('#hang-up').on 'click', (event) ->
     pubnub.peerConnection currentCall, (peerConnection) ->
       peerConnection.close()
+      $(document).trigger "call:end"
+
+  # Call Status
+  # ================
+  videoControls = $ '#video-controls'
+  timeEl = videoControls.find '#time'
+  time = 0
+  timeInterval = null
+  videoControls.hide()
+
+  increment = () ->
+    time += 1
+    minutes = Math.floor(time / 60)
+    seconds = time % 60
+    if minutes.toString().length is 1 then minutes = "0#{minutes}"
+    if seconds.toString().length is 1 then seconds = "0#{seconds}"
+    timeEl.text "#{minutes}:#{seconds}"
+
+  $(document).on "call:start", (event) =>
+    videoControls.show()
+    time = 0
+    timeEl.text "00:00"
+    timeInterval = setInterval increment, 1000
+
+  $(document).on "call:end", (event) =>
+    videoControls.hide()
+    clearInterval timeInterval
 
   gotStream = (stream) ->
     document.querySelector('#self-call-video').src = URL.createObjectURL(stream)
@@ -136,6 +221,7 @@ $(document).ready () ->
   navigator.webkitGetUserMedia({audio: false, video: true}, gotStream)
 
   # Debug
-  pages.caller.className += ' active'
-  login("Guest" + Math.floor(Math.random() * 100))
-  #pages.login.className += ' active'
+  # pages.caller.className += ' active'
+  # login("Guest" + Math.floor(Math.random() * 100))
+
+  pages.login.className += ' active'
