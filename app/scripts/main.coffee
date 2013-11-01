@@ -41,15 +41,15 @@ $(document).ready () ->
   # ================
   document.querySelector('#login').addEventListener 'click', (event) ->
     uuid = document.querySelector('#userid').value
-    login uuid
+    login "guest-#{uuid}"
 
   login = (name) ->
     uuid = name
 
-    # Get the current list of contacts
-    plusClient.getContacts (result) ->
-      # result.items
-      
+    if plusClient?
+      # Get the current list of contacts
+      plusClient.getContacts (result) ->
+        # result.items
 
     window.pubnub = PUBNUB.init
       publish_key: 'pub-c-7070d569-77ab-48d3-97ca-c0c3f7ab6403'
@@ -80,7 +80,9 @@ $(document).ready () ->
         # gender
         # id
         # image
-        login "#{result.id}-#{result.displayName}"
+        name = result.displayName.split(' ')
+        name = name[0] + ' ' + name[1].charAt(0) + '.'
+        login "#{result.id}-#{name}"
     else if authResult['error']
       # Update to reflect signed out user
       # Possible Values:
@@ -117,8 +119,8 @@ $(document).ready () ->
   # Answering
   # =================
   caller = ''
-  modal = $ '#answer-modal'
-  modal.modal({ show: false })
+  modalAnswer = $ '#answer-modal'
+  modalAnswer.modal({ show: false })
 
   publishStream = (uuid) ->
     pubnub.publish
@@ -131,6 +133,7 @@ $(document).ready () ->
         document.querySelector('#call-video').src = URL.createObjectURL(event.stream)
       disconnect: (uuid, pc) ->
         document.querySelector('#call-video').src = ''
+        $(document).trigger "call:end"
 
   answer = (otherUuid) ->
     currentCall = otherUuid
@@ -161,24 +164,34 @@ $(document).ready () ->
           $(document).trigger "call:start", data.callee
 
   onCalling = (caller) ->
-    modal.find('.caller').text "#{caller} is calling..."
-    modal.modal 'show'
+    caller = caller.split('-')[1]
+    modalAnswer.find('.caller').text "#{caller} is calling..."
+    modalAnswer.modal 'show'
 
-  modal.find('.btn-primary').on 'click', (event) ->
+  modalAnswer.find('.btn-primary').on 'click', (event) ->
     answer caller
-    modal.modal 'hide'
+    modalAnswer.modal 'hide'
 
   # Calling
   # =================
+  modalCalling = $ '#calling-modal'
+  modalCalling.modal({ show: false })
   $('#user-list').on 'click', 'a[data-user]', (event) ->
     otherUuid = $(event.target).data 'user'
     currentCall = otherUuid
+
+    name = otherUuid.split('-')[1]
+    modalCalling.find('.calling').text "Calling #{name}..."
+    modalCalling.modal 'show'
 
     pubnub.publish
       channel: 'call'
       message:
         caller: uuid
         callee: otherUuid
+
+  $(document).on 'call:start', () ->
+    modalCalling.modal 'hide'
 
   # Hanging Up
   # ================

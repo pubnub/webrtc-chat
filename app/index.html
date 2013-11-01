@@ -100,6 +100,19 @@
           </div>
         </div>
 
+        <div id="calling-modal" class="modal hide">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Outgoing Call</h3>
+          </div>
+          <div class="modal-body">
+            <p class="calling">Calling (User)...</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+          </div>
+        </div>
+
         <script type="text/html" id="user-item-template">
             <li class="user" data-user="<%= id %>">
                 <span class="name"><%= name %></span>
@@ -149,8 +162,7 @@
         <script src="bower_components/sass-bootstrap/js/bootstrap-collapse.js"></script>
         <script src="bower_components/sass-bootstrap/js/bootstrap-tab.js"></script>
         <!-- endbuild -->
-
-         <!-- Place this asynchronous JavaScript just before your </body> tag -->
+        
         <script type="text/javascript">
           (function() {
            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
