@@ -428,7 +428,7 @@
         if (options.user != null) {
           // Setup the connection if it does not exist
           if (PEER_CONNECTIONS[options.user] == null) {
-            PUBNUB.createP2PConnection(options.user, null, function (uuid) {
+            PUBNUB.createP2PConnection(options.user, null, function () {
               if (options.stream != null) {
                 debug("Publishing stream to user", options.stream, options.user);
                 PEER_CONNECTIONS[options.user].connection.addStream(options.stream);
@@ -437,7 +437,7 @@
           }
 
           if (options.stream != null) {
-            if (exists == true) {
+            if (exists === true) {
               debug("Publishing stream to user", options.stream, options.user);
               PEER_CONNECTIONS[options.user].connection.addStream(options.stream);
             }

@@ -46,6 +46,17 @@ body, html {
   padding-top: 20px;
 }
 
+// PubNub Logo
+.logo {
+  background: url(../images/pubnub-large.png);
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+  display: block;
+  width: 196px;
+  height: 44px;
+}
+
 // Page styles
 .page {
   display: none;
@@ -78,7 +89,7 @@ body, html {
     color: $lightColor;
     padding-top: 50px;
     padding-left: 5%;
-    padding-right: 30%;
+    padding-right: 23%;
     background: $mainColor;
     font-size: 16px;
     line-height: 22px;
@@ -144,10 +155,11 @@ body, html {
   }
 
   #video-controls {
+    position: absolute;
+    bottom: 0;
     background: #ECF2F2;
     border-bottom: 3px solid rgba(0, 0, 0, 0.7);
     padding: 20px;
-    border-radius: 0px 0px 10px 10px;
     color: rgba(0, 0, 0, 0.7);
 
     #time {
@@ -159,7 +171,7 @@ body, html {
 #video-container {
   background: black;
   position: relative;
-  height: 75%;
+  height: 100%;
   display: inline-block;
 
   #video {
