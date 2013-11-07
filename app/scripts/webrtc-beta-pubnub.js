@@ -564,6 +564,19 @@
       }
     };
 
+    // PUBNUB.closeConnection
+    // Closes a WebRTC peer connection
+    API['closeConnection'] = function (uuid, callback) {
+      if (callback != null) {
+        if (PEER_CONNECTIONS[uuid] != null) {
+          PEER_CONNECTIONS[uuid].connection.close();
+          PEER_CONNECTIONS[uuid] = null;
+        }
+
+        callback(uuid);
+      }
+    };
+
     // PUBNUB.dataChannel
     // Returns the current data channel if one exists
     API['dataChannel'] = function (uuid, callback) {

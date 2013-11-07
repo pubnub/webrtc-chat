@@ -196,8 +196,7 @@ $(document).ready () ->
   # Hanging Up
   # ================
   $('#hang-up').on 'click', (event) ->
-    pubnub.peerConnection currentCall, (peerConnection) ->
-      peerConnection.close()
+    pubnub.closeConnection currentCall, () ->
       $(document).trigger "call:end"
 
   # Call Status
@@ -231,7 +230,7 @@ $(document).ready () ->
     #document.querySelector('#self-call-video').play()
     myStream = stream
 
-  navigator.webkitGetUserMedia({audio: false, video: true}, gotStream)
+  navigator.webkitGetUserMedia({audio: true, video: true}, gotStream)
 
   # Debug
   # pages.caller.className += ' active'
