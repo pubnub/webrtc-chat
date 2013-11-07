@@ -334,6 +334,7 @@
             // Handle closed event for connection
             if (PEER_CONNECTIONS[uuid].events.disconnect) {
               PEER_CONNECTIONS[uuid].events.disconnect(uuid, pc);
+              closeConnection(uuid);
             }
           }
         };
@@ -564,13 +565,18 @@
       }
     };
 
+    // Closes a peer connection
+    function closeConnection(uuid) {
+      PEER_CONNECTIONS[uuid].connection.close();
+      PEER_CONNECTIONS[uuid] = null;
+    };
+
     // PUBNUB.closeConnection
     // Closes a WebRTC peer connection
     API['closeConnection'] = function (uuid, callback) {
       if (callback != null) {
         if (PEER_CONNECTIONS[uuid] != null) {
-          PEER_CONNECTIONS[uuid].connection.close();
-          PEER_CONNECTIONS[uuid] = null;
+          closeConnection(uuid);
         }
 
         callback(uuid);
