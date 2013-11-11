@@ -108,11 +108,10 @@ $(document).ready () ->
         #   occupancy: 2
         # }
         if data.action is "join" and data.uuid isnt uuid
-          for i in [0..100]
-            newItem = userTemplate
-              name: data.uuid.split('-')[1]
-              id: data.uuid
-            userList.append newItem
+          newItem = userTemplate
+            name: data.uuid.split('-')[1]
+            id: data.uuid
+          userList.append newItem
         else if data.action is "leave" and data.uuid isnt uuid
           item = userList.find "li[data-user=\"#{data.uuid}\"]"
           item.remove()
