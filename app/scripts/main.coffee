@@ -134,6 +134,8 @@ $(document).ready () ->
       disconnect: (uuid, pc) ->
         document.querySelector('#call-video').src = ''
         $(document).trigger "call:end"
+      connect: (uuid, pc) ->
+        # Do nothing
 
   answer = (otherUuid) ->
     currentCall = otherUuid

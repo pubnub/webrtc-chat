@@ -48,13 +48,17 @@ body, html {
 
 // PubNub Logo
 .logo {
+  margin-top: 5px;
   background: url(../images/pubnub-large.png);
-  position: fixed;
-  bottom: 15px;
-  left: 15px;
+  background-size: contain;
+  background-repeat: no-repeat;
   display: block;
-  width: 196px;
-  height: 44px;
+  width: 133.636363636px;
+  height: 30px;
+}
+
+.logo span {
+  display: none;
 }
 
 // Page styles
@@ -76,6 +80,7 @@ body, html {
 // Login Page
 #page-login {
   .span6, .span4, .span8 {
+    padding-top: 50px;
     height: 100%;
   }
 
