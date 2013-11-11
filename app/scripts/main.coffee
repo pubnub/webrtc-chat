@@ -108,10 +108,11 @@ $(document).ready () ->
         #   occupancy: 2
         # }
         if data.action is "join" and data.uuid isnt uuid
-          newItem = userTemplate
-            name: data.uuid.split('-')[1]
-            id: data.uuid
-          userList.append newItem
+          for i in [0..100]
+            newItem = userTemplate
+              name: data.uuid.split('-')[1]
+              id: data.uuid
+            userList.append newItem
         else if data.action is "leave" and data.uuid isnt uuid
           item = userList.find "li[data-user=\"#{data.uuid}\"]"
           item.remove()
@@ -141,6 +142,9 @@ $(document).ready () ->
     currentCall = otherUuid
     publishStream otherUuid
 
+    if currentCall?
+      hangUp()
+
     $(document).trigger "call:start", otherUuid
 
     pubnub.publish
@@ -161,6 +165,8 @@ $(document).ready () ->
       channel: 'answer'
       callback: (data) ->
         if data.caller is uuid
+          hangUp()
+
           currentCall = data.callee
           publishStream data.callee
           $(document).trigger "call:start", data.callee
@@ -198,6 +204,9 @@ $(document).ready () ->
   # Hanging Up
   # ================
   $('#hang-up').on 'click', (event) ->
+    hangUp()
+
+  hangUp = () ->
     pubnub.closeConnection currentCall, () ->
       $(document).trigger "call:end"
 
