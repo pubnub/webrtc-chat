@@ -200,6 +200,42 @@ $(document).ready () ->
   $(document).on 'call:start', () ->
     modalCalling.modal 'hide'
 
+  # Text Chat
+  # ================
+  messageBox = $ '#chat-receive-message'
+  messageInput = $ '#chat-message'
+  messageBox.text ''
+  messageControls = $ '#chat-area'
+  messageControls.hide()
+
+  getCombinedChannel = () ->
+    if currentCall > uuid
+      "#{currentCall}-#{uuid}"
+    else
+      "#{uuid}-#{currentCall}"
+
+  $(document).on "call:start", (event) =>
+    messageControls.show()
+    messageBox.text ''
+    pubnub.subscribe
+      channel: getCombinedChannel()
+      callback: (message) ->
+        messageBox.append "<br />#{message}"
+        messageBox.attr
+          "scrollTop": messageBox.attr('scrollHeight')
+
+  $(document).on "call:end", (event) =>
+    messageControls.hide()
+    pubnub.unsubscribe
+      channel: getCombinedChannel()
+
+  messageInput.on 'keydown', (event) =>
+    if event.keyCode is 13 and currentCall?
+      pubnub.publish
+        channel: getCombinedChannel()
+        message: messageInput.val()
+      messageInput.val ''
+
   # Hanging Up
   # ================
   $('#hang-up').on 'click', (event) ->
