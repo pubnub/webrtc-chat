@@ -58,6 +58,20 @@ body, html {
   }
 }
 
+// Get started area
+.highlight {
+  background: #c50220;
+
+  h3 {
+    color: white;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
+  }
+
+  .btn {
+    margin-top: 8px;
+  }
+}
+
 // PubNub Logo
 .logo {
   margin-top: 5px;
@@ -91,9 +105,11 @@ body, html {
 
 // Login Page
 #page-login {
-  .span6, .span4, .span8 {
-    padding-top: 50px;
-    height: 100%;
+  #login-container {
+    .span6, .span4, .span8 {
+      padding-top: 50px;
+      height: 100%;
+    }
   }
 
   .row-fluid {

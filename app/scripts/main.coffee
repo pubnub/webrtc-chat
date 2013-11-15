@@ -221,8 +221,7 @@ $(document).ready () ->
       channel: getCombinedChannel()
       callback: (message) ->
         messageBox.append "<br />#{message}"
-        messageBox.attr
-          "scrollTop": messageBox.attr('scrollHeight')
+        messageBox.scrollTop messageBox[0].scrollHeight
 
   $(document).on "call:end", (event) =>
     messageControls.hide()
