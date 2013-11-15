@@ -14,6 +14,7 @@
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" type="text/css" href="bower_components/google-code-prettify/src/prettify.css">
     <link rel="stylesheet" type="text/css" href="bower_components/jquery-mobile-bower/css/jquery.mobile-1.3.2.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
@@ -25,6 +26,8 @@
     <script type="text/javascript">stLight.options({publisher: "b6e7a490-0eea-4599-b7e8-4ba158f1367a", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
   </head>
   <body>
+    <a href="https://github.com/pubnub" id="github"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 99999999999;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+
 
     <!-- Navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
@@ -92,96 +95,107 @@
           <div class="span12">
             <h2>PubNub WebRTC Chat</h2>
             <h4>Powerful Video Chat, No Plugins</h4>
-            <p>Building a video and audio communication application is commonly seen as no small task. We aim to prove otherwise. With the power of WebRTC browser technology we can now do video and audio communication natively on any web-enabled device. Combine this with the signaling capabilities of PubNub and now it is easy to create a cross browser communication application!</p>
-            <br />
+              <p>
+Video communication is seen as no small task to build. Learning about video codecs, signaling, and presence is just the beginning when it comes to implementation. At PubNub, we have partnered our technology with WebRTC to make integration fast and easy for developers. Out of the box our <a href="http://github.com/pubnub/webrtc" target="_blank">WebRTC Framework</a> will power audio, video, and data communication between two browsers.
+              </p>
 
-            <p>
-Building Video Communication With PubNub and WebRTC
+              <h2>See It In Action</h2>
+              <p>
+                <iframe width="560" height="315" src="//www.youtube.com/embed/E8C8ouiXHHk" frameborder="0" allowfullscreen></iframe>
+              </p>
+              
+              <h2>Get Started by Installing Our SDK’s</h2>
+              <p>
+The first step to building your own video and audio communication is to install both <a href="http://pubnub.com" target="_blank">PubNub</a> and our <a href="http://github.com/pubnub/webrtc" target="_blank">WebRTC SDK</a>. To install both of these, first download the WebRTC SDK to your local project somewhere. Then include both libraries:
+              </p>
 
-Video communication can be a hard feature to implement. Learning about video codecs, signaling, and presence is just the beginning when it comes to implementation. At PubNub, we have partnered our technology with WebRTC to make integration fast and easy for developers. Out of the box our WebRTC Framework [http://github.com/pubnub/webrtc] will power audio, video, and data communication between two browsers.
+<pre class="prettyprint linenums">
+&lt;script src=”http://cdn.pubnub.com/pubnub.min.js”&gt;&lt;/script&gt;
+&lt;script src=”/path/to/webrtc-beta-pubnub.*.*.*.js”&gt;&lt;/script&gt;
+</pre>
 
-Get Started by Installing Our SDK’s
-The first step to building your own video and audio communication is to install both PubNub [http://pubnub.com] and our WebRTC SDK [http://github.com/pubnub/webrtc]. To install both of these, first download the WebRTC SDK to your local project somewhere. Then include both libraries:
+              <p>
+              Also, if you have not already, visit PubNub [http://pubnub.com/free-trial] to sign up for a free account and learn how to initialize your pubnub JavaScript interface
+              </p>
 
-	<script src=”http://cdn.pubnub.com/pubnub.min.js”></script>
-	<script src=”/path/to/webrtc-beta-pubnub.*.*.*.js”></script>
-
-Also, if you have not already, visit PubNub [http://pubnub.com/free-trial] to sign up for a free account and learn how to initialize your pubnub JavaScript interface
-
-Getting a List of Users to Call
+              <h2>Getting a List of Users to Call</h2>
+              <p>
 The PubNub library comes with the functionality to see what users come online and offline. To start, enable this functionality by visiting admin.pubnub.com and enabling “presence” on your API key. This will allow your clients to start receiving join and leave events.
+              </p>
 
 In our application, every user is subscribed to one channel. This means every user can see all the other users that are currently connected. This is done easily by using a channel named “phonebook”:
 
-	pubnub.subscribe({
-		channel: ‘phonebook’,
-		callback: function (message) {
-			// Do nothing in our callback
-		},
-		presence: function (data) {
-			if (data.action === “join” && data.uuid != myUuid) {
-				var parts = data.uuid.split(‘-’);
-				var newUser = newUserTemplate({
-					name: parts[1]
-					id: parts[0]
-				});
-				userList.append(newUser);
-			} else if (data.action === “leave” and data.uuid != myUuid) {
-				var parts = data.uuid.split(‘-’);
-				var item = userList.find(“li[data-user=\”” + parts[0] + “\”]”);
-				item.remove();
-			}
-		}
-	});
+<pre class="prettyprint linenums">
+pubnub.subscribe({
+  channel: ‘phonebook’,
+  callback: function (message) {
+    // Do nothing in our callback
+  },
+  presence: function (data) {
+    if (data.action === “join” && data.uuid != myUuid) {
+      var parts = data.uuid.split(‘-’);
+      var newUser = newUserTemplate({
+        name: parts[1]
+        id: parts[0]
+      });
+      userList.append(newUser);
+    } else if (data.action === “leave” and data.uuid != myUuid) {
+      var parts = data.uuid.split(‘-’);
+      var item = userList.find(“li[data-user=\”” + parts[0] + “\”]”);
+      item.remove();
+    }
+  }
+});
+</pre>
 
 Currently the user data is stored in the data- attributes of the element itself. This makes it easy to work with as a prototype but could be extended to an AngularJS scope or Backbone Collection easily.
 
 Get the User Media
 The first step in any WebRTC application is to get the stream from the user’s webcam. Luckily, the browser provides an easy to use way of getting this stream. The code for doing this uses the getUserMedia API:
 
-	function gotStream(stream) {
-		document.querySelector(‘#self-call-video’).src = URL.createObjectURL(stream);
-		myStream = stream; // Save the stream for later use
-	};
-	navigator.webkitGetUserMedia({ audio: true, video: true}, gotStream);
+function gotStream(stream) {
+document.querySelector(‘#self-call-video’).src = URL.createObjectURL(stream);
+myStream = stream; // Save the stream for later use
+};
+navigator.webkitGetUserMedia({ audio: true, video: true}, gotStream);
 
 Note here that the stream is stored for use in publishing to a WebRTC peer connection. When you make this call the user will have to allow your application to use the webcam. The callback will not be called until this has been done, so it may be good to notify the user that they need to allow this before moving on.
 
 Calling a User
 Once your application has the user stream you can now publish that stream to another user. Since the RTCPeerConnection requires you to publish your stream before the connection is made, the library provides methods for both subscribing and listen for new connections. The code below will take care of both cases and allow a completed call to be made:
 
-	function publishStream(uuid) {
-		pubnub.publish({
-			user: uuid,
-			stream: myStream
-		});
+function publishStream(uuid) {
+pubnub.publish({
+user: uuid,
+stream: myStream
+});
 
-		pubnub.subscribe({
-			user: uuid,
-			stream: function (data, event) {
-				document.querySelector(‘#call-video’).src = URL.createObjectUrl(event.stream);
-			},
-			disconnect: function (uuid, pc) {
-				document.querySelector(“#call-video”).src = “”;
+pubnub.subscribe({
+user: uuid,
+stream: function (data, event) {
+document.querySelector(‘#call-video’).src = URL.createObjectUrl(event.stream);
+},
+disconnect: function (uuid, pc) {
+document.querySelector(“#call-video”).src = “”;
 $(document).trigger(“call:end”);
 }
 });
 };			
 
-	pubnub.onNewConnection(function (uuid) {
-		if (myStream != null) {
-			publishStream(uuid);
-		}
-	});
+pubnub.onNewConnection(function (uuid) {
+if (myStream != null) {
+publishStream(uuid);
+}
+});
 
-	pubnub.subscribe({
-		channel: ‘answer’,
-		callback: function (data) {
-			if (data.caller == myUuid) {
-				publishStream(data.callee);
-			}
-		}
-	});
+pubnub.subscribe({
+channel: ‘answer’,
+callback: function (data) {
+if (data.caller == myUuid) {
+publishStream(data.callee);
+}
+}
+});
 
 This will take care of all the use cases when calling another user:
 The user has called us and we want to react immediately to the call
@@ -191,19 +205,19 @@ We want to subscribe to another user before they call
 Hanging Up
 Hanging up the call is as simple as closing the peer connection. The other user tries to reconnect for a few seconds and then recognizes the call is dropped after that. The library provides an interface for both cases:
 
-	function hangUp() {
-		pubnub.closeConnection(currentCall, function () {
-			$(document).trigger(“call:end”);
-		}
-	};
+function hangUp() {
+pubnub.closeConnection(currentCall, function () {
+$(document).trigger(“call:end”);
+}
+};
 
-	pubnub.subscribe({
-		… // Other subscribe code here
-		disconnect: function (uuid, peerConnection) {
-			hangUp();
-			// React to the disconnect
-		}
-	});
+pubnub.subscribe({
+… // Other subscribe code here
+disconnect: function (uuid, peerConnection) {
+hangUp();
+// React to the disconnect
+}
+});
 
 Using Other Logins
 Our demo also allows you to login with any Google+ account. Since our users are identified by a unique user ID, this ID can be anything the developers provides. In this use case, we provide the unique user ID provided by the Google+ API.
@@ -214,52 +228,52 @@ Calling In-Browser is Amazing
 Now we can take this seemingly complex application and simplify the time to develop this so even one person can build it. The most amazing thing about this is that it is scalable from the beginning. Using the PubNub network allows your application to scale on a global level. The RTCPeerConnection also abstracts away much of the complexity that deals with codecs and setting up a peer connection. We at PubNub hope to see a whole new wave of communication applications on the web! Check out the demo of our video calling application here [link].
 </p>
 
-            <h4>&lsaquo; Allow Video and Login to the Left to Get Started</h4>
+<h4>&lsaquo; Allow Video and Login to the Left to Get Started</h4>
           </div>
         </div>
 
-<div class="row-fluid">
-        <div class="span4">
-          <h3>What is PubNub?</h3>
-          <p>Today’s users expect to interact in real-time. PubNub makes it easy for you to add real-time capabilities to your apps, without worrying about the infrastructure. Build apps that allow your users to engage in real-time across mobile, browser, desktop and server.</p>
-        </div>
-        <div class="span8">
-          <h3>What Can I Build With PubNub?</h3>
-          <p>The PubNub Real-Time Network takes care of the connections, global infrastructure and key building blocks for real-time interactivity, so you can focus creating killer apps…</p>
-          <ul style="float: left; width: 50%">
-            <li>Real-Time Collaboration</li>
-            <li>Machine-to-Machine</li>
-            <li>Real-Time Financial Streams</li>
-            <li>Real-Time Location Tracking</li>
-            <li>Call Triggering</li>
-          </ul>
-          <ul>
-            <li>2nd Screen Sync</li>
-            <li>Live Dashboards</li>
-            <li>Multi-Player Games</li>
-            <li>Group Chat Rooms</li>
-            <li>Thousands more…</li>
-          </ul>
+        <div class="row-fluid">
+          <div class="span4">
+            <h3>What is PubNub?</h3>
+            <p>Today’s users expect to interact in real-time. PubNub makes it easy for you to add real-time capabilities to your apps, without worrying about the infrastructure. Build apps that allow your users to engage in real-time across mobile, browser, desktop and server.</p>
+          </div>
+          <div class="span8">
+            <h3>What Can I Build With PubNub?</h3>
+            <p>The PubNub Real-Time Network takes care of the connections, global infrastructure and key building blocks for real-time interactivity, so you can focus creating killer apps…</p>
+            <ul style="float: left; width: 50%">
+              <li>Real-Time Collaboration</li>
+              <li>Machine-to-Machine</li>
+              <li>Real-Time Financial Streams</li>
+              <li>Real-Time Location Tracking</li>
+              <li>Call Triggering</li>
+            </ul>
+            <ul>
+              <li>2nd Screen Sync</li>
+              <li>Live Dashboards</li>
+              <li>Multi-Player Games</li>
+              <li>Group Chat Rooms</li>
+              <li>Thousands more…</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
 
-<div class="highlight">
-    <div class="container">
+      <div class="highlight">
+        <div class="container">
+          <div class="row-fluid">
+            <div class="span8">
+              <h3 class="call-to-action">Start Building Real-Time Apps Now!</h3>
+            </div>
+            <div class="span2 offset2">
+              <a href="http://pubnub.com/free-trial" class="btn btn-large" id="get-started">Get Started</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="row-fluid">
-        <div class="span8">
-          <h3 class="call-to-action">Start Building Real-Time Apps Now!</h3>
-        </div>
-        <div class="span2 offset2">
-          <a href="http://pubnub.com/free-trial" class="btn btn-large" id="get-started">Get Started</a>
-        </div>
+        &copy; 2013 PubNub
       </div>
-    </div>
-  </div>
-
-  <div class="row-fluid">
-    &copy; 2013 PubNub
-  </div>
     </div>
 
     <div id="page-caller" class="page">
@@ -376,7 +390,16 @@ Now we can take this seemingly complex application and simplify the time to deve
     <script src="bower_components/sass-bootstrap/js/bootstrap-scrollspy.js"></script>
     <script src="bower_components/sass-bootstrap/js/bootstrap-collapse.js"></script>
     <script src="bower_components/sass-bootstrap/js/bootstrap-tab.js"></script>
+    <script src="bower_components/google-code-prettify/src/prettify.js"></script>
     <!-- endbuild -->
+
+    <script>
+      (function(){
+
+        prettyPrint();
+      })();
+    </script>
+
 
     <script type="text/javascript">
       (function() {
