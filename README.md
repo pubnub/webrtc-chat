@@ -5,7 +5,7 @@ Powerful Video Chat, No Plugins
 Building a video and audio communication application is commonly seen as no small task. We aim to prove otherwise. With the power of WebRTC browser technology we can now do video and audio communication natively on any web-enabled device. Combine this with the signaling capabilities of PubNub and now it is easy to create a cross browser communication application!
 
 # Live Demo
-To see a live demo of our communication application in action, check out [http://pubnub.github.io/webrtc-chat](http://pubnub.github.io/webrtc-chat)
+To see a live demo of our communication application in action, check out [http://pubnub.github.io/webrtc-chat](http://webrtc.co)
 
 # Getting Started
 To build this application yourself, check out the documentation on our demo page. It will explain all the steps necessary to get started building your very own audio and video communication application!
