@@ -23,6 +23,11 @@ body, html {
   background: white;
   padding: 15px;
   border-radius: 10px;
+
+  &.social {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
 }
 
 .header {
@@ -92,12 +97,10 @@ body, html {
 
   .information {
     color: $lightColor;
-    padding-top: 50px;
-    padding-left: 5%;
-    padding-right: 23%;
     background: $mainColor;
     font-size: 16px;
     line-height: 22px;
+    padding-top: 20px;
 
     h2 {
       color: white;

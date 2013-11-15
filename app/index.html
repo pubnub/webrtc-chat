@@ -3,205 +3,217 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 
-        <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" type="text/css" href="bower_components/jquery-mobile-bower/css/jquery.mobile-1.3.2.css">
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
-        <!-- build:js scripts/vendor/modernizr.js -->
-        <script src="bower_components/modernizr/modernizr.js"></script>
-        <!-- endbuild -->
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" type="text/css" href="bower_components/jquery-mobile-bower/css/jquery.mobile-1.3.2.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
 
-        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-        <script type="text/javascript">stLight.options({publisher: "b6e7a490-0eea-4599-b7e8-4ba158f1367a", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-    </head>
-    <body>
-      
-      <!-- Navbar -->
-      <div class="navbar navbar-default navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <a class="brand" href="#">WebRTC Chat</a>
-            <ul class="nav">
-              <li class="active"><a href="/">Demo</a></li>
-              <li><a href="http://github.com/pubnub/webrtc-chat" target="_blank"><i class="icon icon-download-alt"></i> GitHub</a></li>
-              <li><a href="/documentation.html">Documentation</a></li>
-            </ul>
-            
-            <div class="nav pull-right">
-              <a href="http://pubnub.com" target="_blank" class="logo"><span>Powered by PubNub</span></a>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher: "b6e7a490-0eea-4599-b7e8-4ba158f1367a", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">WebRTC Chat</a>
+          <ul class="nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="http://github.com/pubnub/webrtc-chat" target="_blank"><i class="icon icon-download-alt"></i> GitHub</a></li>
+            <li><a href="#docs">Docs</a></li>
+          </ul>
+
+          <div class="nav pull-right">
+            <a href="http://pubnub.com" target="_blank" class="logo"><span>Powered by PubNub</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="page-login">
+      <div class="container">
+        <div class="row-fluid">
+          <div class="span4 offset4">
+            <div class="pad-20 center">
+              <div class="box">
+                <h3>Log In</h3>
+                <input type="text" id="userid" placeholder="Username" />
+                <br />
+                <a href="#" class="btn btn-large btn-inverse" id="login">Log In</a>
+                <br />
+                <p style="padding-top: 12px;">- or -</p>
+                <span id="signinButton">
+                  <span
+                    class="g-signin"
+                    data-callback="signinCallback"
+                    data-clientid="296041572299.apps.googleusercontent.com"
+                    data-cookiepolicy="single_host_origin"
+                    data-requestvisibleactions="http://schemas.google.com/AddActivity"
+                    data-scope="https://www.googleapis.com/auth/plus.login"
+                    data-approvalprompt="force">
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="span4">
+            <div class="box social">
+              <p>Like This Demo? Tell Your Friends!</p>
+              <div class="share">
+                <span class='st_facebook_large' displayText='Facebook'></span>
+                <span class='st_twitter_large' displayText='Tweet'></span>
+                <span class='st_linkedin_large' displayText='LinkedIn'></span>
+                <span class='st_googleplus_large' displayText='Google +'></span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-        <div class="row-fluid page" id="page-login">
-              <div class="span4">
-                  <div class="pad-20 center">
-                      <div class="box">
-                          <h3>Log In</h3>
-                          <input type="text" id="userid" placeholder="Username" />
-                          <br />
-                          <a href="#" class="btn btn-large btn-inverse" id="login">Log In</a>
-                          <br />
-                          <p style="padding-top: 12px;">- or -</p>
-                          <span id="signinButton">
-                            <span
-                              class="g-signin"
-                              data-callback="signinCallback"
-                              data-clientid="296041572299.apps.googleusercontent.com"
-                              data-cookiepolicy="single_host_origin"
-                              data-requestvisibleactions="http://schemas.google.com/AddActivity"
-                              data-scope="https://www.googleapis.com/auth/plus.login"
-                              data-approvalprompt="force">
-                          </span>
-                        </span>
-                    </div>
+      <br />
+
+      <div class="row-fluid information">
+        <div class="container">
+          <div class="span12">
+            <h2>PubNub WebRTC Chat</h2>
+            <h4>Powerful Video Chat, No Plugins</h4>
+            <p>Building a video and audio communication application is commonly seen as no small task. We aim to prove otherwise. With the power of WebRTC browser technology we can now do video and audio communication natively on any web-enabled device. Combine this with the signaling capabilities of PubNub and now it is easy to create a cross browser communication application!</p>
+            <br />
+
+            <h4>&lsaquo; Allow Video and Login to the Left to Get Started</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="page-caller" class="page">
+      <div class="row-fluid">
+        <div class="span3 sidebar">
+          <h3>Online Contacts</h3>
+          <ul id="user-list">
+          </ul>
+        </div>
+
+        <div class="span9 call-content">
+          <div class="row">
+            <div class="span12" id="video-container">
+              <div class="row" id="video">
+                <div class="span12">
+                  <video id="self-call-video" src="" autoplay="autoplay" muted="true"></video>
+                  <video id="call-video" src="" autoplay="autoplay"></video>
                 </div>
+              </div>
+
+              <div class="row">
+                <div class="span12" id="video-controls">
+                  <a href="#" class="btn btn-danger" id="hang-up">Hang Up</a>
+                  <span id="time">10:00</span>
+                </div>
+              </div>
             </div>
-
-            <div class="span8 information">
-                <h2>PubNub WebRTC Chat</h2>
-                <h4>Powerful Video Chat, No Plugins</h4>
-                <p>Building a video and audio communication application is commonly seen as no small task. We aim to prove otherwise. With the power of WebRTC browser technology we can now do video and audio communication natively on any web-enabled device. Combine this with the signaling capabilities of PubNub and now it is easy to create a cross browser communication application!</p>
-                <br />
-
-                <p>Like This Demo? Tell Your Friends!</p>
-                <div class="share">
-                  <span class='st_facebook_large' displayText='Facebook'></span>
-                  <span class='st_twitter_large' displayText='Tweet'></span>
-                  <span class='st_linkedin_large' displayText='LinkedIn'></span>
-                  <span class='st_googleplus_large' displayText='Google +'></span>
-                </div>
-
-                <br />
-
-                <h4>&lsaquo; Allow Video and Login to the Left to Get Started</h4>
-            </div>
-        </div>
-
-        <div id="page-caller" class="page">
-            <div class="row-fluid">
-                <div class="span3 sidebar">
-                    <h3>Online Contacts</h3>
-                    <ul id="user-list">
-                    </ul>
-                </div>
-
-                <div class="span9 call-content">
-                    <div class="row">
-                        <div class="span12" id="video-container">
-                            <div class="row" id="video">
-                                <div class="span12">
-                                    <video id="self-call-video" src="" autoplay="autoplay" muted="true"></video>
-                                    <video id="call-video" src="" autoplay="autoplay"></video>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="span12" id="video-controls">
-                                    <a href="#" class="btn btn-danger" id="hang-up">Hang Up</a>
-                                    <span id="time">10:00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="answer-modal" class="modal hide">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">Incoming Call</h3>
-          </div>
-          <div class="modal-body">
-            <p class="caller">(User) is calling...</p>
-          </div>
-          <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Ignore</button>
-            <button class="btn btn-primary">Answer</button>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div id="calling-modal" class="modal hide">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">Outgoing Call</h3>
-          </div>
-          <div class="modal-body">
-            <p class="calling">Calling (User)...</p>
-          </div>
-          <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-          </div>
-        </div>
+    <div id="answer-modal" class="modal hide">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Incoming Call</h3>
+      </div>
+      <div class="modal-body">
+        <p class="caller">(User) is calling...</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Ignore</button>
+        <button class="btn btn-primary">Answer</button>
+      </div>
+    </div>
 
-        <script type="text/html" id="user-item-template">
-            <li class="user" data-user="<%= id %>">
-                <span class="name"><%= name %></span>
-                <a href="#" class="btn btn-success" data-user="<%= id %>">Call</a>
-            </li>
+    <div id="calling-modal" class="modal hide">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Outgoing Call</h3>
+      </div>
+      <div class="modal-body">
+        <p class="calling">Calling (User)...</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+      </div>
+    </div>
+
+    <script type="text/html" id="user-item-template">
+      <li class="user" data-user="<%= id %>">
+      <span class="name"><%= name %></span>
+      <a href="#" class="btn btn-success" data-user="<%= id %>">Call</a>
+      </li>
+    </script>
+
+    <!--[if lt IE 7]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-41019038-2');ga('send','pageview');
+    </script>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="scripts/pubnub.js"></script>
+    <script src="scripts/webrtc-beta-pubnub.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js(.tmp) scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js scripts/plugins.js -->
+    <script src="bower_components/sass-bootstrap/js/bootstrap-affix.js"></script>
+    <script src="bower_components/sass-bootstrap/js/bootstrap-alert.js"></script>
+    <script src="bower_components/sass-bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="bower_components/sass-bootstrap/js/bootstrap-tooltip.js"></script>
+    <script src="bower_components/sass-bootstrap/js/bootstrap-modal.js"></script>
+    <script src="bower_components/sass-bootstrap/js/bootstrap-transition.js"></script>
+    <script src="bower_components/sass-bootstrap/js/bootstrap-button.js"></script>
+    <script src="bower_components/sass-bootstrap/js/bootstrap-popover.js"></script>
+    <script src="bower_components/sass-bootstrap/js/bootstrap-typeahead.js"></script>
+    <script src="bower_components/sass-bootstrap/js/bootstrap-carousel.js"></script>
+    <script src="bower_components/sass-bootstrap/js/bootstrap-scrollspy.js"></script>
+    <script src="bower_components/sass-bootstrap/js/bootstrap-collapse.js"></script>
+    <script src="bower_components/sass-bootstrap/js/bootstrap-tab.js"></script>
+    <!-- endbuild -->
+
+    <script type="text/javascript">
+      (function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = 'https://apis.google.com/js/client:plusone.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
         </script>
-
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-41019038-2');ga('send','pageview');
-        </script>
-
-        <!-- build:js scripts/vendor.js -->
-        <!-- bower:js -->
-        <script src="bower_components/underscore/underscore.js"></script>
-        <script src="bower_components/jquery/jquery.js"></script>
-        <script src="scripts/pubnub.js"></script>
-        <script src="scripts/webrtc-beta-pubnub.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
-
-        <!-- build:js(.tmp) scripts/main.js -->
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js scripts/plugins.js -->
-        <script src="bower_components/sass-bootstrap/js/bootstrap-affix.js"></script>
-        <script src="bower_components/sass-bootstrap/js/bootstrap-alert.js"></script>
-        <script src="bower_components/sass-bootstrap/js/bootstrap-dropdown.js"></script>
-        <script src="bower_components/sass-bootstrap/js/bootstrap-tooltip.js"></script>
-        <script src="bower_components/sass-bootstrap/js/bootstrap-modal.js"></script>
-        <script src="bower_components/sass-bootstrap/js/bootstrap-transition.js"></script>
-        <script src="bower_components/sass-bootstrap/js/bootstrap-button.js"></script>
-        <script src="bower_components/sass-bootstrap/js/bootstrap-popover.js"></script>
-        <script src="bower_components/sass-bootstrap/js/bootstrap-typeahead.js"></script>
-        <script src="bower_components/sass-bootstrap/js/bootstrap-carousel.js"></script>
-        <script src="bower_components/sass-bootstrap/js/bootstrap-scrollspy.js"></script>
-        <script src="bower_components/sass-bootstrap/js/bootstrap-collapse.js"></script>
-        <script src="bower_components/sass-bootstrap/js/bootstrap-tab.js"></script>
-        <!-- endbuild -->
-        
-        <script type="text/javascript">
-          (function() {
-           var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-           po.src = 'https://apis.google.com/js/client:plusone.js';
-           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-         })();
-        </script>
-</body>
-</html>
+      </body>
+    </html>
