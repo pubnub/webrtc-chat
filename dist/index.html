@@ -13,7 +13,7 @@
     <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet" type="text/css">
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="stylesheet" href="styles/c3ae2769.main.css">
+    <link rel="stylesheet" href="styles/4c6e2083.main.css">
     <script src="scripts/vendor/f7f27360.modernizr.js"></script>
 
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
@@ -27,7 +27,7 @@
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="#">WebRTC Chat</a>
+          <a class="brand" href="#">WebRTC + PubNub</a>
           <ul class="nav">
             <li class="active"><a href="/">Home</a></li>
             <li><a href="http://github.com/pubnub/webrtc-chat" target="_blank"><i class="icon icon-download-alt"></i> GitHub</a></li>
@@ -41,7 +41,16 @@
       </div>
     </div>
 
-    <div class="page" id="page-login">
+    <div class="page active" id="page-login">
+      <div class="row-fluid banner">
+        <div class="container">
+          <div class="span12">
+            <h2>WebRTC + PubNub</h2>
+            <h4>Open Source Template for Powerful Video Chat, No Plugins</h4>
+            </div>
+        </div>
+      </div>
+      
       <div class="container">
         <div class="row-fluid" id="login-container">
           <div class="span4 offset4">
@@ -80,10 +89,8 @@
       <div class="row-fluid information">
         <div class="container">
           <div class="span12">
-            <h2>PubNub WebRTC Chat</h2>
-            <h4>Powerful Video Chat, No Plugins</h4>
               <p>
-Video communication is seen as no small task to build. Learning about video codecs, signaling, and presence is just the beginning when it comes to implementation. At PubNub, we have partnered our technology with WebRTC to make integration fast and easy for developers. Out of the box our <a href="http://github.com/pubnub/webrtc" target="_blank">WebRTC Framework</a> will power audio, video, and data communication between two browsers.
+Building video communication is no small task. Learning about video codecs, signaling, and presence is just the beginning when it comes to implementation. At PubNub, we have partnered our technology with WebRTC to make integration fast and easy for developers. Out of the box our <a href="http://github.com/pubnub/webrtc" target="_blank">WebRTC Framework</a> will power audio, video, and data communication between two browsers.
               </p>
 
               <h2>See It In Action</h2>
@@ -94,7 +101,7 @@ Video communication is seen as no small task to build. Learning about video code
               </p>
 
               <a id="docs"></a>
-              <h2>Get Started by Installing Our SDK’s</h2>
+              <h2>Get Started by Installing the PubNub WebRTC SDK</h2>
               <p>
 The first step to building your own video and audio communication is to install both <a href="http://pubnub.com" target="_blank">PubNub</a> and our <a href="http://github.com/pubnub/webrtc" target="_blank">WebRTC SDK</a>. To install both of these, first download the WebRTC SDK to your local project somewhere. Then include both libraries:
               </p>
@@ -107,7 +114,7 @@ The first step to building your own video and audio communication is to install 
               <img src="images/5d885493.presence.png" alt="Presence Free Trial" width="299" height="349" style="float: right">
 
               <p>
-              Also, if you have not already, visit PubNub [http://pubnub.com/free-trial] to sign up for a free account and learn how to initialize your pubnub JavaScript interface
+              Also, if you have not already, visit <a href="http://pubnub.com/free-trial" target="_blank">PubNub</a> to sign up for a free account and learn how to initialize your pubnub JavaScript interface
               </p>
 
               <h2>Getting a List of Users to Call</h2>
@@ -165,7 +172,7 @@ Note here that the stream is stored for use in publishing to a WebRTC peer conne
 
               <img src="images/bd96b6cb.notification.png" alt="Allow Media Notification" width="615" height="31" style="margin: 0 auto; display: block">
 
-              <h2>Calling a User</h2>
+              <h2>Calling a User with PubNub WebRTC</h2>
               <p>
 Once your application has the user stream you can now publish that stream to another user. Since the RTCPeerConnection requires you to publish your stream before the connection is made, the library provides methods for both subscribing and listen for new connections. The code below will take care of both cases and allow a completed call to be made:
               </p>
@@ -214,7 +221,7 @@ pubnub.subscribe({
                 </ul>
               </p>
 
-              <h2>Hanging Up</h2>
+              <h2>Hanging Up a WebRTC Call</h2>
               <p>
               Hanging up the call is as simple as closing the peer connection. The other user tries to reconnect for a few seconds and then recognizes the call is dropped after that. The library provides an interface for both cases:
               </p>
@@ -242,7 +249,7 @@ Our demo also allows you to login with any Google+ account. Since our users are 
 <p>
 Unfortunately this just gives us an ID for each user, so if we want to tell the user who is currently available for chat they will just see the numerical representation of each user. The way we get around this limitation is by including the user name in each unique user ID. Our user names now look like “1234567-John Doe”. Now we can call String.split(‘-’) to get the name and the ID separated so we can show the human readable form to the user.
 </p>
-<h2>Calling In-Browser is Amazing</h2>
+<h2>WebRTC Calling In-Browser is Amazing</h2>
 <p>
 Now we can take this seemingly complex application and simplify the time to develop this so even one person can build it. The most amazing thing about this is that it is scalable from the beginning. Using the PubNub network allows your application to scale on a global level. The RTCPeerConnection also abstracts away much of the complexity that deals with codecs and setting up a peer connection. We at PubNub hope to see a whole new wave of communication applications on the web! Check out the demo of our video calling application here [link].
 </p>
@@ -398,7 +405,7 @@ Now we can take this seemingly complex application and simplify the time to deve
 
     <script src="scripts/6c82e91b.vendor.js"></script>
 
-    <script src="scripts/056084d8.main.js"></script>
+    <script src="scripts/6315c7ba.main.js"></script>
 
     <script src="scripts/5c9d2c71.plugins.js"></script>
 

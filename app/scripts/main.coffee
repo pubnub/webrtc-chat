@@ -22,6 +22,10 @@ class GooglePlusClient
         'max-results': 10000
     $.ajax(req).done callback
 
+navigator.getUserMedia = navigator.getUserMedia or
+                        navigator.webkitGetUserMedia or
+                        navigator.mozGetUserMedia
+
 $(document).ready () ->
   # Pages
   # ================
@@ -232,7 +236,7 @@ $(document).ready () ->
     if event.keyCode is 13 and currentCall?
       pubnub.publish
         channel: getCombinedChannel()
-        message: messageInput.val()
+        message: uuid.split('-')[1] + ": " + messageInput.val()
       messageInput.val ''
 
   # Hanging Up
@@ -275,10 +279,11 @@ $(document).ready () ->
     #document.querySelector('#self-call-video').play()
     myStream = stream
 
-  navigator.webkitGetUserMedia({audio: true, video: true}, gotStream)
+  navigator.getUserMedia {audio: true, video: true}, gotStream, (error) ->
+    console.log("Error getting user media: ", error)
 
   # Debug
   # pages.caller.className += ' active'
   # login("Guest" + Math.floor(Math.random() * 100))
 
-  pages.login.className += ' active'
+  # pages.login.className += ' active'

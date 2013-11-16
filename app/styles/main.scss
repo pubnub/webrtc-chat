@@ -4,6 +4,7 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 $gridGutterWidth: 0px;
 
 @import 'sass-bootstrap/lib/bootstrap';
+@import 'compass/css3';
 @import 'anim';
 
 $lightColor: #F5FFF7;
@@ -87,6 +88,22 @@ body, html {
   display: none;
 }
 
+// Banner
+.banner {
+  padding-top: 95px;
+  padding-bottom: 30px;
+  background-color: $mainColor;
+  background-image:
+      linear-gradient(rgba(255,255,255,.2) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(255,255,255,.2) 2px, transparent 2px),
+      linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.2) 1px, transparent 1px);
+  background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px; 
+  color: $lightColor;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
+}
+
 // Page styles
 .page {
   display: none;
@@ -107,7 +124,6 @@ body, html {
 #page-login {
   #login-container {
     .span6, .span4, .span8 {
-      padding-top: 50px;
       height: 100%;
     }
   }
