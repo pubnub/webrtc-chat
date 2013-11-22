@@ -142,11 +142,11 @@ $(document).ready () ->
         # Do nothing
 
   answer = (otherUuid) ->
+    if currentCall? and currentCall isnt otherUuid
+      hangUp()
+
     currentCall = otherUuid
     publishStream otherUuid
-
-    if currentCall?
-      hangUp()
 
     $(document).trigger "call:start", otherUuid
 
@@ -168,7 +168,8 @@ $(document).ready () ->
       channel: 'answer'
       callback: (data) ->
         if data.caller is uuid
-          hangUp()
+          if data.callee isnt currentCall
+            hangUp()
 
           currentCall = data.callee
           publishStream data.callee
