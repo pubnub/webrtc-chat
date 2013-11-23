@@ -108,11 +108,12 @@
       this.send = function (message, force) {
         var strMsg = message;
         message.uuid = selfUuid;
-        //message = JSON.stringify(message);
+        force = true;
 
         if (this.peerReady === true || force === true) {
           if (message.sdp) {
           }
+          debug("Sending to: ", PREFIX + otherUuid, " message ", message);
           pubnub.publish({
             channel: PREFIX + otherUuid,
             message: message
@@ -135,7 +136,7 @@
     }
 
     function personalChannelCallback(message) {
-      //message = JSON.parse(message);
+      debug("Personal channel callback: ", message);
 
       if (message.uuid != null) {
         if (message.uuid === UUID) {
@@ -205,10 +206,12 @@
     // Subscribe to our own personal channel to listen for data.
     PUBNUB.subscribe({
       channel: PREFIX + uuid,
-      restore: false,
+      //restore: false,
       //timetoken: backfillTime * Math.pow(10, 7),
       connect: function () {
         CONNECTED = true;
+
+        debug("Connected to channel: ", PREFIX + uuid);
 
         for (var i = 0; i < CONNECTION_QUEUE.length; i++) {
           var args = CONNECTION_QUEUE[i];
@@ -236,7 +239,7 @@
        * CHROME HACK TO GET AROUND BANDWIDTH LIMITATION ISSUES
        ***/
       if (IS_CHROME) {
-        description.sdp = transformOutgoingSdp(description.sdp);
+        //description.sdp = transformOutgoingSdp(description.sdp);
       }
 
       if (connection.connection.signalingState !== 'have-local-offer') {
@@ -249,6 +252,7 @@
       }
 
       if (CONNECTED === false) {
+        debug("Not connected");
         CONNECTION_QUEUE.push([description, connection]);
       } else {
         connection.signalingChannel.send({
