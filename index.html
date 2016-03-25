@@ -6,21 +6,47 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>WebRTC and PubNub - Open Source Template for Powerful Video Chat</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-
+    <title>WebRTC and PubNub</title>
+    <!--
     <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet" type="text/css">
+  -->
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="stylesheet" href="styles/4c6e2083.main.css">
-    <script src="scripts/vendor/f7f27360.modernizr.js"></script>
-
+    <!-- <script src="scripts/vendor/f7f27360.modernizr.js"></script>
+    -->
+<!--
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
     <script type="text/javascript">stLight.options({publisher: "b6e7a490-0eea-4599-b7e8-4ba158f1367a", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+  -->
+  <style type='text/css'>
+    html, body {
+      font-size: 100%;
+      line-height: 130% !important;
+    }
+    h1, h2, h3, h4, h5 {
+      margin: 0.5em 0em;
+      font-weight: normal !important;
+      color: #eee !important;
+    }
+    .content h1, .content h2, .content h3, .content h4 {
+      padding-top: 1em;
+    }
+    h1 { font-size: 200%; }
+    h2 { font-size: 170%; }
+    h3 { font-size: 140%; }
+    p, li {
+      color: #eee;
+      line-height: 160%;
+    }
+    a {
+      color: white !important;
+      text-decoration: underline;
+    }
+  </style>
   </head>
   <body>
-    
+
 <!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PZWSZ2"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -31,9 +57,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PZWSZ2');</script>
 <!-- End Google Tag Manager -->
 
-    <a href="https://github.com/pubnub" id="github"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 99999999999" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-
-
     <!-- Navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-inner">
@@ -41,8 +64,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <a class="brand" href="#">WebRTC + PubNub</a>
           <ul class="nav">
             <li class="active"><a href="/">Home</a></li>
-            <li><a href="http://github.com/pubnub/webrtc-chat" target="_blank"><i class="icon icon-download-alt"></i> GitHub</a></li>
-            <li><a href="#docs">Docs</a></li>
+            <li><a href="https://github.com/stephenlb/webrtc-sdk" target="_blank"><i class="icon icon-download-alt"></i> GitHub</a></li>
+            <li><a href="https://www.pubnub.com/docs">Docs</a></li>
           </ul>
 
           <div class="nav pull-right">
@@ -57,350 +80,117 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="container">
           <div class="span12">
             <h2>WebRTC + PubNub</h2>
-            <h4>Open Source Template for Powerful Video Chat, No Plugins</h4>
+            <h4>Video Chat, No Plugins</h4>
             </div>
         </div>
       </div>
-      
-      <div class="container">
-        <div class="row-fluid" id="login-container">
-          <div class="span4 offset4">
-            <div class="pad-20 center">
-              <div class="box">
-                <h3>Try Now</h3>
-                <input type="text" id="userid" placeholder="Username">
-                <br>
-                <a href="#" class="btn btn-large btn-inverse" id="login">Log In</a>
-                <br>
-                <p style="padding-top: 12px">- or -</p>
-                <span id="signinButton">
-                  <span class="g-signin" data-callback="signinCallback" data-clientid="587465758861.apps.googleusercontent.com" data-cookiepolicy="single_host_origin" data-requestvisibleactions="http://schemas.google.com/AddActivity" data-scope="https://www.googleapis.com/auth/plus.login" data-approvalprompt="force">
-                  </span>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="span4">
-            <div class="box social">
-              <p>Like This Demo? Tell Your Friends!</p>
-              <div class="share">
-                <span class="st_facebook_large" displaytext="Facebook"></span>
-                <span class="st_twitter_large" displaytext="Tweet"></span>
-                <span class="st_linkedin_large" displaytext="LinkedIn"></span>
-                <span class="st_googleplus_large" displaytext="Google +"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <br>
 
       <div class="row-fluid information">
         <div class="container">
-          <div class="span12">
-              <p>
-Building video calling apps is no small task. Learning about video codecs, signaling, and presence is just the beginning when it comes to implementation. At PubNub, we have partnered our technology with WebRTC to make integration fast and easy to build video chat software. Out of the box our <a href="http://github.com/pubnub/webrtc" target="_blank">WebRTC Framework</a> will power audio, video, and data communication between two browsers.
-              </p>
+          <div class="span12 content">
+            <h2>
+              What sort of services does PubNub provide with respect to WebRTC and video chat?
+            </h2>
 
-              <h2>See It In Action</h2>
-              <p>
-                <iframe src="//player.vimeo.com/video/79737005" width="500" height="281" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe> </p><p><a href="http://vimeo.com/79737005">WebRTC Video App Demo</a> from <a href="http://vimeo.com/pubnub">PubNub Video</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-              
+            <p>Before we get started here please review <a href='https://webrtc.ventures/2016/03/3-things-webrtc-cannot-do/' target="_blank">3 Things WebRTC Can Not Do.</a></p>
 
-              <a id="docs"></a>
-              <h2>Get Started by Installing the PubNub WebRTC SDK</h2>
-              <p>
-The first step to building your own video calling app is to install both <a href="http://pubnub.com" target="_blank">PubNub</a> and our <a href="http://github.com/pubnub/webrtc" target="_blank">WebRTC SDK</a>. To install both of these, first download the WebRTC SDK to your local project somewhere. Then include both libraries:
-              </p>
+            <p>We get this question quite frequently because many struggle to understand the role that PubNub plays in WebRTC and video chat applications. So we will provide you with some details that should leave you with a full understanding of all the moving parts and the role those parts play.</p>
 
-<pre class="prettyprint linenums">
-&lt;script src=”http://cdn.pubnub.com/pubnub.min.js”&gt;&lt;/script&gt;
-&lt;script src=”/path/to/webrtc-beta-pubnub.*.*.*.js”&gt;&lt;/script&gt;
-</pre>
-              
-              <img src="images/5d885493.presence.png" alt="Presence Free Trial" width="299" height="349" style="float: right">
+            <h2>What is WebRTC?</h2>
 
-              <p>
-              Also, if you have not already, visit <a href="http://pubnub.com/free-trial" target="_blank">PubNub</a> to sign up for a free account and learn how to initialize your pubnub JavaScript interface
-              </p>
+            <p><a href=''>Wikipedia says that WebRTC (Web Real-Time Communication) is</a> an API definition drafted by the World Wide Web Consortium (W3C) that supports browser-to-browser applications for voice calling, video chat, and P2P file sharing without the need of either internal or external plugins.
+            </p>
 
-              <h2>Getting a List of Users to Call</h2>
-              <p>
-The PubNub library comes with the functionality to see what users come online and offline. To start, enable this functionality by visiting admin.pubnub.com and enabling “presence” on your API key. This will allow your clients to start receiving join and leave events.
-              </p>
-              
-              <p>
-In our application, every user is subscribed to one channel. This means every user can see all the other users that are currently connected. This is done easily by using a channel named “phonebook”:
-              </p>
+            <p>But WebRTC is not a standalone API. It needs a signaling service to coordinate communication and metadata needs to be sent between callers before a connection can be established. This metadata includes information such as:</p>
 
-<pre class="prettyprint linenums">
-pubnub.subscribe({
-  channel: ‘phonebook’,
-  callback: function (message) {
-    // Do nothing in our callback
-  },
-  presence: function (data) {
-    if (data.action === “join” && data.uuid != myUuid) {
-      var parts = data.uuid.split(‘-’);
-      var newUser = newUserTemplate({
-        name: parts[1]
-        id: parts[0]
-      });
-      userList.append(newUser);
-    } else if (data.action === “leave” and data.uuid != myUuid) {
-      var parts = data.uuid.split(‘-’);
-      var item = userList.find(“li[data-user=\”” + parts[0] + “\”]”);
-      item.remove();
-    }
-  }
-});
-</pre>
-
-              <p>
-              Currently the user data is stored in the data- attributes of the element itself. This makes it easy to work with as a prototype but could be extended to an AngularJS scope or Backbone Collection easily.
-              </p>
-
-              <h2>Get the User Media</h2>
-              <p>
-              The first step in any WebRTC application is to get the stream from the user’s webcam. Luckily, the browser provides an easy to use way of getting this stream. The code for doing this uses the getUserMedia API:
-              </p>
-
-<pre class="prettyprint linenums">
-function gotStream(stream) {
-  document.querySelector(‘#self-call-video’).src = URL.createObjectURL(stream);
-  myStream = stream; // Save the stream for later use
-};
-navigator.webkitGetUserMedia({ audio: true, video: true}, gotStream);
-</pre>
-
-              <p>
-Note here that the stream is stored for use in publishing to a WebRTC peer connection. When you make this call the user will have to allow your application to use the webcam. The callback will not be called until this has been done, so it may be good to notify the user that they need to allow this before moving on.
-              </p>
-
-              <img src="images/bd96b6cb.notification.png" alt="Allow Media Notification" width="615" height="31" style="margin: 0 auto; display: block">
-
-              <h2>Calling a User with PubNub WebRTC</h2>
-              <p>
-Once your application has the user stream you can now publish that stream to another user. Since the RTCPeerConnection requires you to publish your stream before the connection is made, the library provides methods for both subscribing and listen for new connections. The code below will take care of both cases and allow a completed call to be made:
-              </p>
-
-<pre class="prettyprint linenums">
-function publishStream(uuid) {
-  pubnub.publish({
-    user: uuid,
-    stream: myStream
-  });
-
-  pubnub.subscribe({
-    user: uuid,
-    stream: function (data, event) {
-      document.querySelector(‘#call-video’).src = URL.createObjectUrl(event.stream);
-    },
-    disconnect: function (uuid, pc) {
-      document.querySelector(“#call-video”).src = “”;
-      $(document).trigger(“call:end”);
-    }
-  });
-};			
-
-pubnub.onNewConnection(function (uuid) {
-  if (myStream != null) {
-    publishStream(uuid);
-  }
-});
-
-pubnub.subscribe({
-  channel: ‘answer’,
-  callback: function (data) {
-    if (data.caller == myUuid) {
-      publishStream(data.callee);
-    }
-  }
-});
-</pre>
-
-              <p>
-              This will take care of all the use cases when calling another user:
-                <ul>
-                  <li>The user has called us and we want to react immediately to the call</li>
-                  <li>We are calling another user by publishing our stream to them</li>
-                  <li>We want to subscribe to another user before they call</li>
-                </ul>
-              </p>
-
-              <h2>Hanging Up a WebRTC Call</h2>
-              <p>
-              Hanging up the call is as simple as closing the peer connection. The other user tries to reconnect for a few seconds and then recognizes the call is dropped after that. The library provides an interface for both cases:
-              </p>
-
-<pre class="prettyprint linenums">
-function hangUp() {
-  pubnub.closeConnection(currentCall, function () {
-    $(document).trigger(“call:end”);
-  }
-};
-
-pubnub.subscribe({
-  // ... Other subscribe code here
-  disconnect: function (uuid, peerConnection) {
-    hangUp();
-    // React to the disconnect
-  }
-});
-</pre>
-
-<h2>Using Other Logins</h2>
-<p>
-Our demo also allows you to login with any Google+ account. Since our users are identified by a unique user ID, this ID can be anything the developers provides. In this use case, we provide the unique user ID provided by the Google+ API.
-</p>
-<p>
-Unfortunately this just gives us an ID for each user, so if we want to tell the user who is currently available for chat they will just see the numerical representation of each user. The way we get around this limitation is by including the user name in each unique user ID. Our user names now look like “1234567-John Doe”. Now we can call String.split(‘-’) to get the name and the ID separated so we can show the human readable form to the user.
-</p>
-<h2>WebRTC Calling In-Browser is Amazing</h2>
-<p>
-Now we can take this seemingly complex application and simplify the time to develop this so even one person can build it. The most amazing thing about this is that it is scalable from the beginning. Using the PubNub network allows your application to scale on a global level. The RTCPeerConnection also abstracts away much of the complexity that deals with codecs and setting up a peer connection. We at PubNub hope to see a whole new wave of communication applications on the web! Check out the demo of our video calling application here [link].
-</p>
-
-<h4>&rsaquo; Login Above to Try The Demo</h4>
-<br>
-          </div>
-        </div>
-      </div>
-
-      <br>
-        
-      <div class="container">
-        <div class="row-fluid">
-          <div class="span4">
-            <h3>What is PubNub?</h3>
-            <p>Today’s users expect to interact in real-time. PubNub makes it easy for you to add real-time capabilities to your apps, without worrying about the infrastructure. Build apps that allow your users to engage in real-time across mobile, browser, desktop and server.</p>
-          </div>
-          <div class="span8">
-            <h3>What Can I Build With PubNub?</h3>
-            <p>The PubNub Real-Time Network takes care of the connections, global infrastructure and key building blocks for real-time interactivity, so you can focus creating killer apps…</p>
-            <ul style="float: left; width: 50%">
-              <li>Real-Time Collaboration</li>
-              <li>Machine-to-Machine</li>
-              <li>Real-Time Financial Streams</li>
-              <li>Real-Time Location Tracking</li>
-              <li>Call Triggering</li>
-            </ul>
             <ul>
-              <li>2nd Screen Sync</li>
-              <li>Live Dashboards</li>
-              <li>Multi-Player Games</li>
-              <li>Group Chat Rooms</li>
-              <li>Thousands more…</li>
+              <li>Session control messages to open and close connections</li>
+              <li>Error messages</li>
+              <li>Codecs/Codec settings, bandwidth and media types</li>
+              <li>Keys to establish a secure connection</li>
+              <li>Network data such as host IP and port</li>
             </ul>
+
+
+
+            <h2>What does PubNub bring to the table?</h2>
+            <p>
+You are going to need a signal protocol service. In other words, a rock solid reliable, low latency messaging service (that would be PubNub) and a hosted WebRTC solution for the audio/video streaming (PubNub does not handle this sort of media).
+</p>
+<h3>PubNub IS the Signaling Protocol Service</h3>
+
+<p>Once signaling has taken place, video/audio/data is streamed directly between clients, using WebRTC’s PeerConnection API. This peer-to-peer direct connection allows you to stream high-bandwidth robust data, such as video. PubNub makes the signaling incredibly simple, and in addition, gives you the power to do so much more with your WebRTC applications.</p>
+
+<h3>What PubNub is NOT</h3>
+
+<p>PubNub is not a server for WebRTC. In other words, video and audio data is not streamed over the PubNub network.</p>
+
+<ul>
+  <li>A signaling service specifies ICE servers that the video chat can stream over.</li>
+  <li>Public STUN servers provided by google can be used, but they are not very reliable.</li>
+  <li>STUN or TURN servers are required to circumnavigate a firewall, else it will fail.</li>
+  <li>Many services provide the <em>total package</em> of signaling and server in one, that is not PubNub. Our audience are the people who want to build their own, more custom service.</li>
+</ul>
+
+<!--
+<h3>Additional PubNub Resources</h3>
+
+<ul>
+  <li><a href='https://www.pubnub.com/developers/demos/webrtc/'>PubNub WebRTC Reference App</a></li>
+  <li><a href='http://pubnub.github.io/rtc-pubnub-fileshare/guide/#_ga=1.122083851.147090062.1453163880'>PubNub Filesharing</a></li>
+</ul>
+-->
+
+
+
+  <h2>More Complete Service Offerings</h2>
+  <p>If you are ready to build it all using just WebRTC, a streaming service and PubNub for your signaling, then you are ready to rock with the above details. But if you want to have much of this abstracted away then keep on reading below to find out about some offerings that will get you to your end goal faster and with less effort.</p>
+
+<h3>Sinch - Powering Communications for Mobile Apps</h3>
+
+<p><a href="https://www.sinch.com/products/webrtc/">Sinch</a> is a cloud-hosted, mobile communications platform that makes adding calling, verification, video, SMS, and IM into apps easier than ever. They have an SDK that is powered by PubNub and many PubNub customers use Sinch in their applications.
+
+<h3>Xirsys - WebRTC Cloud</h3>
+
+<p>XirSys hosts STUN and TURN servers catering to the needs of WebRTC applications.
+They created a tutorial series and demo application showing how to integrate
+PubNub with XirSys for a complete WebRTC solution.
+</p>
+
+<ul>
+  <li><a href="http://xirsys.com/pubnub-sdk/">Xirsys + PubNub Part 1</a></li>
+  <li><a href="http://xirsys.com/pubnub-part-2/">Xirsys + PubNub Part 2</a></li>
+  <li><a href="https://github.com/xirsys/demo-pubnub">Xirsys/PubNub Demo source</a></li>
+</ul>
+
+<h3>Open Source Options</h3>
+
+<p>There are also a few open source STUN and TURN server projects that can be downloaded and hosted:</p>
+
+<ul>
+  <li><a href='https://github.com/coturn/coturn'>Coturn</a></li>
+  <li><a href='http://www.stunprotocol.org'>Stuntman</a></li>
+  <li><a href='https://github.com/jitsi/turnserver'>TurnServer</a>
+</ul>
+
+<p>So as you can see, PubNub does not provide audio/video streaming services
+  but if you are building this solution, PubNub is a necessary piece
+  to tie it all together with the signal protocol.</p>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
           </div>
         </div>
       </div>
-
-      <br>
-
-      <div class="highlight">
-        <div class="container">
-          <div class="row-fluid">
-            <div class="span8">
-              <h3 class="call-to-action">Start Building Real-Time Apps Now!</h3>
-            </div>
-            <div class="span3 offset1">
-              <a href="http://pubnub.com/free-trial" class="btn btn-large" id="get-started" target="_blank">Get Started</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <br>
 
       <div class="container">
         <div class="row-fluid">
-          &copy; 2013 PubNub
+          &copy; 2016 PubNub
         </div>
       </div>
 
-      <br>
-      <br>
     </div>
-
-    <div id="page-caller" class="page">
-      <div class="row-fluid">
-        <div class="span3 sidebar">
-          <h3>Online Contacts</h3>
-          <ul id="user-list">
-          </ul>
-        </div>
-
-        <div class="span9 call-content">
-          <div class="row">
-            <div class="span12" id="video-container">
-              <div class="row" id="video">
-                <div class="span12">
-                  <video id="self-call-video" src="" autoplay="autoplay" muted="true"></video>
-                  <video id="call-video" src="" autoplay="autoplay"></video>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="span12" id="video-controls">
-                  <a href="#" class="btn btn-danger" id="hang-up">Hang Up</a>
-                  <span id="time">10:00</span>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="span12" id="chat-area">
-                  <div id="chat-receive-message">
-                    Hello, World!
-                  </div>
-                  <input type="text" id="chat-message" name="message" placeholder="Type to chat">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="answer-modal" class="modal hide">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Incoming Call</h3>
-      </div>
-      <div class="modal-body">
-        <p class="caller">(User) is calling...</p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Ignore</button>
-        <button class="btn btn-primary">Answer</button>
-      </div>
-    </div>
-
-    <div id="calling-modal" class="modal hide">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Outgoing Call</h3>
-      </div>
-      <div class="modal-body">
-        <p class="calling">Calling (User)...</p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-      </div>
-    </div>
-
-    <script type="text/html" id="user-item-template">
-      <li class="user" data-user="<%= id %>">
-      <span class="name"><%= name %></span>
-      <a href="#" class="btn btn-success" data-user="<%= id %>">Call</a>
-      </li>
-    </script>
-
-    <!--[if lt IE 7]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -411,27 +201,12 @@ Now we can take this seemingly complex application and simplify the time to deve
         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-16927549-1');ga('send','pageview');
     </script>
-
+<!--
     <script src="scripts/5944680d.vendor.js"></script>
 
     <script src="scripts/2ab4bd38.main.js"></script>
 
     <script src="scripts/5c9d2c71.plugins.js"></script>
-
-    <script>
-      (function(){
-
-        prettyPrint();
-      })();
-    </script>
-
-
-    <script type="text/javascript">
-      (function() {
-var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-po.src = 'https://apis.google.com/js/client:plusone.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-})();
-        </script>
+-->
       </body>
     </html>
